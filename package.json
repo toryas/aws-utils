@@ -1,0 +1,14 @@
+{
+  "name": "@nogen/aws-utils",
+  "version": "0.0.1",
+  "description": "utils for AWS",
+  "main": "index.js",
+  "scripts": {
+    "build": ""
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "aws-sdk": "^2.635.0"
+  }
+}
