@@ -4,7 +4,7 @@
   "description": "utils for AWS",
   "main": "index.js",
   "scripts": {
-    "demo": "gulp build"
+    "build": "gulp build"
   },
   "keywords": [
     "aws"
