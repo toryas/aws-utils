@@ -6,11 +6,12 @@ const pkg = require('./package.json');
 
 
 task('cleanDist', async () => {
-    return src('./dist', { read: false, allowEmpty: true }).pipe(clean({ force: true }))
+    await src('./dist', { read: false, allowEmpty: true }).pipe(clean({ force: true }))
 })
 
 task('copyToDist', async () => {
-    return src('./src/module/**/*').pipe(dest('./dist/'))
+    await src('./src/module/**/*').pipe(dest('./dist/'))
+    await src('./README.md').pipe(dest('./dist/'))
 })
 
 task('makePackageJson', async () => {
@@ -30,7 +31,7 @@ task('makePackageJson', async () => {
     distPkg.keywords = pkg.keywords;
     distPkg.license = pkg.license;
 
-    return file('package.json', JSON.stringify(distPkg,null,2), { src: true })
+    await file('package.json', JSON.stringify(distPkg,null,2), { src: true })
     .pipe(dest('dist'));
 
 

@@ -6,7 +6,7 @@ const getAWSSdk = () => {
     let isConfigFile = fs.existsSync('./nogen.config.js');
 
     if (isConfigFile) {
-        let { AWS_CONFIG } = require('../../../../nogen.config');
+        let { AWS_CONFIG } = require('../../../nogen.config');
         AWS.config.update({
             region: AWS_CONFIG.region
         });
