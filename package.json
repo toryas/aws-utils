@@ -1,5 +1,5 @@
 {
-  "name": "nogen-utils-aws",
+  "name": "toryas-utils-aws",
   "version": "0.0.1",
   "description": "utils for AWS",
   "main": "index.js",
