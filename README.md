@@ -1,4 +1,4 @@
-# NOGEN / AWS - Utils
+# Toryas / AWS - Utils
 
 ## Utils for AWS services
 
@@ -8,7 +8,7 @@ This lib contains many wrapers for aws-sdk libs to work with AWS services....
 
 for install run:
 
-> npm install --save @nogen/aws-utils
+> npm install --save toryas-aws-utils
 
 ## Config
 
@@ -29,9 +29,9 @@ module.exports = { AWS_CONFIG }
 To use the lib, you only should import the util that you need.
 
 ```javascript
-const { queryRunner } = require('@nogen/aws-utils')
+const { queryRunner } = require('toryas-aws-utils')
 or
-import { queryRunner } from '@nogen/aws-utils'
+import { queryRunner } from 'toryas-aws-utils'
 
 
 // ...
