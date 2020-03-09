@@ -12,7 +12,7 @@ for install run:
 
 ## Config
 
-To use you need create a config file named `nogen.config.js` in root of project
+To use you need create a config file named `toryas.config.js` in root of project
 
 he config file looks like : 
 
