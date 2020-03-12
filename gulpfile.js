@@ -30,6 +30,9 @@ task('makePackageJson', async () => {
     distPkg.main = pkg.main;
     distPkg.keywords = pkg.keywords;
     distPkg.license = pkg.license;
+    distPkg.bugs = pkg.bugs;
+    distPkg.homepage = pkg.homepage;
+    distPkg.repository = pkg.repository;
 
     await file('package.json', JSON.stringify(distPkg,null,2), { src: true })
     .pipe(dest('dist'));

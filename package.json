@@ -1,13 +1,17 @@
 {
   "name": "toryas-utils-aws",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "utils for AWS",
   "main": "index.js",
   "scripts": {
     "build": "gulp build"
   },
   "keywords": [
-    "aws"
+    "aws",
+    "utils",
+    "helper",
+    "athena",
+    "s3"
   ],
   "author": "Toryas - toutox@gmail.com",
   "license": "ISC",
@@ -16,5 +20,14 @@
     "gulp": "^4.0.2",
     "gulp-clean": "^0.4.0",
     "gulp-file": "^0.4.0"
+  },
+  "bugs": {
+    "url": "https://github.com/toryas/aws-utils/issues"
+  },
+  "homepage": "https://github.com/toryas/aws-utils#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/toryas/aws-utils.git"
   }
+  
 }

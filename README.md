@@ -1,15 +1,24 @@
-# Toryas / AWS - Utils
+# Toryas / Utils AWS
+
+- [How to install](#install)
+- [Config](#config)
+- [Usage](#usage)
+- [Utils List](#list)
 
 ## Utils for AWS services
 
 This lib contains many wrapers for aws-sdk libs to work with AWS services....
 
+To view full documentation visit [GitHub Page](https://github.com/toryas/aws-utils#README.md)
+
+<a name="install"></a>
 ## Install 
 
 for install run:
 
-> npm install --save toryas-aws-utils
+> npm install --save toryas-utils-aws
 
+<a name="config"></a>
 ## Config
 
 To use you need create a config file named `toryas.config.js` in root of project
@@ -23,15 +32,15 @@ const AWS_CONFIG = {
 
 module.exports = { AWS_CONFIG }
 ```
-
+<a name="usage"></a>
 ## Usage
 
 To use the lib, you only should import the util that you need.
 
 ```javascript
-const { queryRunner } = require('toryas-aws-utils')
+const { queryRunner } = require('toryas-utils-aws')
 or
-import { queryRunner } from 'toryas-aws-utils'
+import { queryRunner } from 'toryas-utils-aws'
 
 
 // ...
@@ -53,3 +62,9 @@ queryRunner.(s3Output,query).then(result => {
 })
 
 ```
+
+<a name="list"></a>
+# Utils List
+
+- [S3 Utils](./docs/s3-utils.md)
+- [Athena Utils](./docs/athena-utils.md)
