@@ -21,13 +21,15 @@ for install run:
 <a name="config"></a>
 ## Config
 
-To use you need create a config file named `toryas.config.js` in root of project
+To use you need create a config file named `toryas.config.js` in root of project.
 
-he config file looks like : 
+You should create and export an object called `AWS_CONFIG` and use de [aws sdk config](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/configuring-the-jssdk.html)
+
+the config file looks like : 
 
 ```javascript
 const AWS_CONFIG = {
-    region: 'us-east-1' // you should set tshe region to use
+    region: 'us-east-1' // you should set the region to use
 }
 
 module.exports = { AWS_CONFIG }
