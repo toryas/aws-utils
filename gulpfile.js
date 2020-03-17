@@ -3,10 +3,11 @@ const clean = require('gulp-clean');
 const file = require('gulp-file');
 const fs = require('fs');
 const pkg = require('./package.json');
+const del = require('del')
 
 
-task('cleanDist', async () => {
-    await src('./dist', { read: false, allowEmpty: true }).pipe(clean({ force: true }))
+task('clean', async ()=>{
+    return del.sync(['dist'])
 })
 
 task('copyToDist', async () => {
@@ -41,7 +42,7 @@ task('makePackageJson', async () => {
 })
 
 task('build', series(
-    'cleanDist',
+    'clean',
     'copyToDist',
     'makePackageJson'
 )); 
