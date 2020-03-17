@@ -7,9 +7,7 @@ const getAWSSdk = () => {
 
     if (isConfigFile) {
         let { AWS_CONFIG } = require('../../../toryas.config');
-        AWS.config.update({
-            region: AWS_CONFIG.region
-        });
+        AWS.config.update(AWS_CONFIG);
     }
 
     return AWS;
