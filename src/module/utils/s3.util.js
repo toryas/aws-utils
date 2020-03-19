@@ -15,7 +15,7 @@ const { getAWSSdk } = require('../service/sdk.service');
  * Copy a S3 Object to new destination
  * 
  * @param {string} fileURL S3 Object's URL  example: s3://myBucket/folder/file.txt
- * @param {string} newBucket  destination bucket EJ: otherFolder/file.txt
+ * @param {string} newBucket  destination bucket EJ: myNewBucket
  * @param {string} newKey  S3 Key destination EJ: otherFolder/file.txt
  * @return {string|false} return S3 Object's URL destination if process success. false for any error.
  */
@@ -26,7 +26,7 @@ const s3CopyFile = async (fileURL, newBucket, newKey) => {
         let s3Elements = s3URLDeconstruct(fileURL);
         let paramsCopy = {
             Bucket: newBucket,
-            CopySource: `${s3Elements.bucket}/${s3Elements.newKey}`,
+            CopySource: `${s3Elements.bucket}/${s3Elements.key}`,
             Key: newKey
         }
         let resp = await s3.copyObject(paramsCopy).promise();

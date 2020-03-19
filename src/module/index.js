@@ -12,6 +12,5 @@ exports.queryRunner = queryRunner;
  */
 exports.s3URLDeconstruct = s3URLDeconstruct; 
 exports.s3CopyFile = s3CopyFile;
-exports.s3CopyFileToFolder = s3CopyFileToFolder;
 exports.s3DeleteFile = s3DeleteFile;
 exports.s3RenameFile = s3RenameFile;
