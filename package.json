@@ -1,10 +1,12 @@
 {
   "name": "toryas-utils-aws",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "description": "utils for AWS",
   "main": "index.js",
   "scripts": {
-    "build": "gulp build"
+    "test": "jest",
+    "build:ts": "gulp clean && tsc && gulp build",
+    "package":"npm run build:ts && npm pack ./lib"
   },
   "keywords": [
     "aws",
@@ -16,10 +18,15 @@
   "author": "Toryas - toutox@gmail.com",
   "license": "ISC",
   "devDependencies": {
+    "@types/jest": "^25.1.4",
     "aws-sdk": "^2.635.0",
     "del": "^5.1.0",
     "gulp": "^4.0.2",
-    "gulp-file": "^0.4.0"
+    "gulp-file": "^0.4.0",
+    "jest": "^25.2.4",
+    "rewire": "^5.0.0",
+    "ts-jest": "^25.3.0",
+    "typescript": "^3.8.3"
   },
   "bugs": {
     "url": "https://github.com/toryas/aws-utils/issues"
@@ -28,5 +35,8 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/toryas/aws-utils.git"
+  },
+  "dependencies": {
+    "csvtojson": "^2.0.10"
   }
 }

@@ -1,0 +1,29 @@
+{
+  "peerDependencies": {
+    "aws-sdk": "^2.635.0"
+  },
+  "types": "index.d.ts",
+  "dependencies": {
+    "csvtojson": "^2.0.10"
+  },
+  "version": "1.0.0",
+  "name": "toryas-utils-aws",
+  "description": "utils for AWS",
+  "main": "index.js",
+  "keywords": [
+    "aws",
+    "utils",
+    "helper",
+    "athena",
+    "s3"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/toryas/aws-utils/issues"
+  },
+  "homepage": "https://github.com/toryas/aws-utils#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/toryas/aws-utils.git"
+  }
+}
