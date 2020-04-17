@@ -13,10 +13,11 @@
     "utils",
     "helper",
     "athena",
-    "s3"
+    "s3",
+    "typescript"
   ],
   "author": "Toryas - toutox@gmail.com",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/jest": "^25.1.4",
     "aws-sdk": "^2.635.0",
