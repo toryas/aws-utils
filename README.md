@@ -21,7 +21,11 @@ for install run:
 <a name="config"></a>
 ## Config
 
-To use you need create a config file named `toryas.config.js` in root of project.
+Exist two ways to use:
+
+### Config File
+
+You can create a config file named `toryas.config.js` in root of project.
 
 You should create and export an object called `AWS_CONFIG` and use de [aws sdk config](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/configuring-the-jssdk.html)
 
@@ -34,32 +38,55 @@ const AWS_CONFIG = {
 
 module.exports = { AWS_CONFIG }
 ```
+
+### Pass AWS-SDK config in constructor
+
+You can pass the aws config in constructor of util like this.
+
+```javascript
+let config = {
+    region:'us-east-1'
+}
+let athenaUtils = new AthenaUtils(config)
+
+```
+
 <a name="usage"></a>
 ## Usage
 
 To use the lib, you only should import the util that you need.
 
 ```javascript
-const { queryRunner } = require('toryas-utils-aws')
+const { AthenaUtils } = require('toryas-utils-aws')
 or
-import { queryRunner } from 'toryas-utils-aws'
+import { AthenaUtils } from 'toryas-utils-aws'
 
 
 // ...
 
-let query = 'SELECT * FROM myTable limit 1';
-let s3Output = "s3://myBucket/somefolder/"
-queryRunner.(s3Output,query).then(result => {
+let params = {
+    query:'SELECT * FROM myTable limit 2',
+    s3output:"s3://myBucket/somefolder/"
+}
+
+let athenaUtils = new AthenaUtils();
+athenaUtils.query.(params).then(result => {
     console.log(result);
     /*
-        {
-            DataScannedInMB: 0,
-            QueryCostInUSD: 0.00004768,
-            EngineExecutionTimeInMillis: 3847,
-            Count: 0,
-            QueryExecutionId: '28f1e0cb-2931-45a3-9e90-5498f09fc063',
-            S3Location: 's3://myBucket/somefolder/28f1e0cb-2931-45a3-9e90-5498f09fc063.csv'
-        }
+        ResultObject {
+            QueryExecutionId: 'F6e86f07-764b-41d9-ab51-787ae5fff64e',
+            S3Location: 's3://myBucket/somefolder/F6e86f07-764b-41d9-ab51-787ae5fff64e.csv',
+            StatementType: 'DML',
+            Statistics: {
+                EngineExecutionTimeInMillis: 2091,
+                DataScannedInBytes: 48,
+                TotalExecutionTimeInMillis: 2315,
+                QueryQueueTimeInMillis: 216,
+                QueryPlanningTimeInMillis: 1337,
+                ServiceProcessingTimeInMillis: 8
+            },
+        Result: { Items: [ [Object], [Object] ], Count: 2 }
+    }
     */
 })
 
@@ -68,5 +95,5 @@ queryRunner.(s3Output,query).then(result => {
 <a name="list"></a>
 # Utils List
 
-- [S3 Utils](./docs/s3-utils.md)
-- [Athena Utils](./docs/athena-utils.md)
+- [S3Utils](./docs/s3-utils.md)
+- [AthenaUtils](./docs/athena-utils.md)

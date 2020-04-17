@@ -1,16 +1,42 @@
 # S3 Utils
 
+
+## How to use
+
+To use this S3Utils follow this steps:
+
+1. Configure the package, see how [here!](../README.md/#config)
+2. Import module
+
+  ```javascript
+  const S3Utils = require('toryas-utils-aws')
+    or
+  import { S3Utils } from 'toryas-utils-aws'
+  ```
+3. Instance a S3Utils object
+
+  ```javascript
+  let s3Utils = new S3Utils();
+  ```
+
+4. Call function
+
+  ```javascript
+  let response = await s3Utils.copyFile(source,"newBucket","folderX/fileCopy.txt");
+  
+  ```
+## Function List
+
 |Function|Description|
 |---|---|
-|[s3URLDeconstruct](#s3URLDeconstruct)|Decontruct S3 Object's URL|
-|[s3RenameFile](#s3RenameFile)|Rename Object in S3|
-|[s3DeleteFile](#s3DeleteFile)|Delete a S3 Object|
-|[s3CopyFile](#s3CopyFile)|Copy a S3 Object to new destination|
+|[urlDeconstruct](#urlDeconstruct)|Decontruct S3 Object's URL|
+|[renameFile](#renameFile)|Rename Object in S3|
+|[deleteFile](#deleteFile)|Delete a S3 Object|
+|[copyFile](#copyFile)|Copy a S3 Object to new destination|
+|[getStream](#getStream)|Get S3 Object as steream|
 
-
-<a name="s3CopyFile"></a>
-
-## s3CopyFile
+## copyFile
+<a name="copyFile"></a>
 
 Copy a S3 Object to new destination
 
@@ -20,21 +46,23 @@ Copy a S3 Object to new destination
 - **newKey** `{string}` S3 Key destination EJ: otherFolder/file.txt
 
 ### Outputs
-- **{string|false}** return S3 Object's URL destination if process success. false for any error.
+- **{Promise<string>}** return S3 Object's URL destination if process success. false for any error.
 ### Example
+
 ```javascript
-import { s3CopyFile } from 'toryas-utils-aws'
+import { S3Utils } from 'toryas-utils-aws'
+
+let s3Utils = new S3Utils();
 
 let source =  "s3://myBucket/folder/file.txt"
-
-let response = s3CopyFile(source,"newBucket","folderX/fileCopy.txt");
+let response = await s3Utils.copyFile(source,"newBucket","folderX/fileCopy.txt");
 console.log(response); // s3://newBucket/folderX/fileCopy.txt
 
 ```
 
 
-<a name="s3DeleteFile"></a>
-## s3DeleteFile
+## deleteFile
+<a name="deleteFile"></a>
 
 Delete a S3 Object
 
@@ -42,17 +70,18 @@ Delete a S3 Object
 - **bucket** `{string}`  S3 Bucket's name example: myBucket
 -  **key** `{string}` S3 Object's key example: path/file.txt
 ### Outputs
-- `{Boolean}` if delete are done "true" else "false"
+- `{Promise<boolean>}` if delete are done "true" else "false"
 ### Example
 ```javascript
-import {s3DeleteFile} from 'toryas-utils-aws'
+import {S3Utils} from 'toryas-utils-aws'
 
-let response = await s3DeleteFile('myBucket','folder/file.txt');
+let s3Utils = new S3Utils();
+let response = await s3Utils.deleteFile('myBucket','folder/file.txt');
 console.log(response) // true
 ```
 
-<a name="s3RenameFile"></a>
-## s3RenameFile
+## renameFile
+<a name="renameFile"></a>
 
     Rename Object in S3
 
@@ -70,18 +99,21 @@ console.log(response) // true
 
 ```javascript
 
-import {s3RenameFile} from 'toryas-utils-aws'
+import {S3Utils} from 'toryas-utils-aws'
+
+let s3Utils = new S3Utils();
 
 let source = "s3://myBucket/folder/file.txt"
-let response = await s3RenameFile(source,"newName.txt")
+let response = await s3Utils.renameFile(source,"newName.txt")
 console.log(response); // s3://myBucket/folder/newName.txt
 ```
 
 
-<a name="s3URLDeconstruct"></a>
-## s3URLDeconstruct
+## urlDeconstruct
+<a name="urlDeconstruct"></a>
 
-    Decontruct S3 Object's URL
+    Decontruct S3 Object's URL.
+    This is a static method, you use this, without instance the S3Utils Object.
 
 ### Parameters
   
@@ -94,10 +126,10 @@ console.log(response); // s3://myBucket/folder/newName.txt
 ### Example
 
 ```javascript 
-import {s3URLDeconstruct} from 'toryas-utils-aws'
+import {S3Utils} from 'toryas-utils-aws'
 
 let url = `s3://myBucket/folder1/folder2/file.txt`
-let s3Element = s3URLDeconstruct(url);
+let s3Element = S3Utils.uRLDeconstruct(url);
 console.log(s3Element)
 /*
 {
@@ -109,3 +141,27 @@ console.log(s3Element)
 */
 ```
  
+ ## getStream
+<a name="getStream"></a>
+
+    Get S3 Object as steream.
+
+### Parameters
+  
+  - **fileURL** `{String}` S3 Object's URL  example: s3://myBucket/folder/file.txt
+
+### Outputs  
+  
+   - internal.Readable
+  
+### Example
+
+```javascript 
+import {S3Utils} from 'toryas-utils-aws'
+
+let s3Utils = new S3Utils();
+
+let file = `s3://myBucket/folder1/folder2/file.txt`
+let stream = s3Utils.getStream(url);
+
+```

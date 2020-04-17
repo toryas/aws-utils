@@ -21,7 +21,7 @@ export class S3Utils {
     }
 
     /**
-     * Get S3 Object as a steream
+     * Get S3 Object as steream
      * 
      * @param fileURL S3 Object's URL  example: s3://myBucket/folder/file.txt
      */
