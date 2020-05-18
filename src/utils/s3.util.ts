@@ -25,7 +25,7 @@ export class S3Utils {
      * 
      * @param fileURL S3 Object's URL  example: s3://myBucket/folder/file.txt
      */
-    public getStream(fileURL: string){
+    public getStream(fileURL: string): any{
         let s3File = S3Utils.urlDeconstruct(fileURL);
         let s3Object = this.s3Api.getObject({ Bucket: s3File.bucket, Key: s3File.key })
         return s3Object.createReadStream();
