@@ -70,7 +70,7 @@ let params = {
 }
 
 let athenaUtils = new AthenaUtils();
-athenaUtils.query.(params).then(result => {
+athenaUtils.query(params).then(result => {
     console.log(result);
     /*
         ResultObject {

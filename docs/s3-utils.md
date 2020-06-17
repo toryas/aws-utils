@@ -34,6 +34,7 @@ To use this S3Utils follow this steps:
 |[deleteFile](#deleteFile)|Delete a S3 Object|
 |[copyFile](#copyFile)|Copy a S3 Object to new destination|
 |[getStream](#getStream)|Get S3 Object as steream|
+|[uploadFile](#uploadFile)|Upload file to S3|
 
 ## copyFile
 <a name="copyFile"></a>
@@ -164,4 +165,25 @@ let s3Utils = new S3Utils();
 let file = `s3://myBucket/folder1/folder2/file.txt`
 let stream = s3Utils.getStream(url);
 
+```
+
+ ## uploadFile
+<a name="uploadFile"></a>
+
+  Upload File to S3.
+
+#### Parameters
+
+  - **filePath** `{String}` file Path.
+  - **bucket** `{String}` bucket name to upload file.
+  - **key** `{String}` key to store file in bucket, Example `folder/file.txt`
+
+### Example
+
+```javascript
+import {S3Utils} from 'toryas-utils-aws'
+
+let s3Utils = new S3Utils();
+
+await s3Util.uploadFile(`./tmp/test.txt`, `test-app-rules`, `upload-test/test.txt`)
 ```

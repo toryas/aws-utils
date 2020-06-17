@@ -2,19 +2,20 @@ import { getAWSSdk } from '../service/sdk.service'
 import { S3Element } from '../domain/S3Element'
 import * as AWS from 'aws-sdk';
 import { API_VERSION } from '../config/apiversion'
+import { readFileSync } from 'fs'
 
 export class S3Utils {
 
     private s3Api: AWS.S3;
     constructor(config = <any>undefined) {
         let aws = getAWSSdk();
-        if(!config){
-            if(aws.configured){
+        if (!config) {
+            if (aws.configured) {
                 this.s3Api = new aws.sdk.S3({ apiVersion: API_VERSION.athena });
-            }else{
+            } else {
                 throw new Error("No config params, create a toryas.config.js file in the root or send a config object in constructor");
             }
-        }else{
+        } else {
             AWS.config.update(config);
             this.s3Api = new AWS.S3({ apiVersion: API_VERSION.athena });
         }
@@ -25,7 +26,7 @@ export class S3Utils {
      * 
      * @param fileURL S3 Object's URL  example: s3://myBucket/folder/file.txt
      */
-    public getStream(fileURL: string): any{
+    public getStream(fileURL: string): any {
         let s3File = S3Utils.urlDeconstruct(fileURL);
         let s3Object = this.s3Api.getObject({ Bucket: s3File.bucket, Key: s3File.key })
         return s3Object.createReadStream();
@@ -114,6 +115,27 @@ export class S3Utils {
         } catch (e) {
             return false;
         }
+    }
+
+    /**
+     * Upload file to S3
+     * 
+     * @param filePath file path
+     * @param bucket bucket name
+     * @param key s3 key for file - example : path/path/file.txt
+     */
+    public async uploadFile(filePath: string, bucket: string, key: string) {
+
+        let fileContent = readFileSync(filePath)
+        let options = {partSize: 10 * 1024 * 1024, queueSize: 1};
+        let params = {
+            Body: fileContent,
+            Bucket: bucket,
+            Key: key
+        }
+
+        return await this.s3Api.upload(params,options).promise();
+
     }
 }
 

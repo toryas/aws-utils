@@ -3,7 +3,7 @@ import { AthenaUtils } from './athena.util'
 jest.setTimeout(100000);
 
 
-describe('Unit Test for Athena Utils', () => {
+describe.skip('Unit Test for Athena Utils', () => {
 
     test('Testing query', async () => {
         

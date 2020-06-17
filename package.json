@@ -1,12 +1,12 @@
 {
   "name": "toryas-utils-aws",
-  "version": "1.0.1",
+  "version": "1.1.1",
   "description": "utils for AWS",
   "main": "index.js",
   "scripts": {
     "test": "jest",
     "build:ts": "gulp clean && tsc && gulp build",
-    "package":"npm run build:ts && npm pack ./lib"
+    "package": "npm run build:ts && npm pack ./lib"
   },
   "keywords": [
     "aws",
@@ -14,7 +14,8 @@
     "helper",
     "athena",
     "s3",
-    "typescript"
+    "typescript",
+    "upload"
   ],
   "author": "Toryas - toutox@gmail.com",
   "license": "MIT",

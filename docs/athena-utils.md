@@ -10,18 +10,18 @@ To use this S3Utils follow this steps:
   ```javascript
   const S3Utils = require('toryas-utils-aws')
     or
-  import { S3Utils } from 'toryas-utils-aws'
+  import { AthenaUtils } from 'toryas-utils-aws'
   ```
 3. Instance a S3Utils object
 
   ```javascript
-  let s3Utils = new S3Utils();
+  let AthenaUtils = new AthenaUtils();
   ```
 
 4. Call function
 
   ```javascript
-  let response = await s3Utils.copyFile(source,"newBucket","folderX/fileCopy.txt");
+  let response = await athenaUtils.query(params);
   ```
 
 
