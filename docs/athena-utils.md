@@ -86,7 +86,7 @@ let athenaUtils = new AthenaUtils();
 
 let params = {
     query:'SELECT * FROM myTable limit 1',
-    s3Output:'s3://myBucket/somefolder/'
+    s3output:'s3://myBucket/somefolder/'
 }
 
 let response = await athenaUtils.query(params);
