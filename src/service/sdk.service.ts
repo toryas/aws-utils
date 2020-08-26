@@ -15,4 +15,7 @@ export function getAWSSdk() {
 
 }
 
+export function Aws(){
+    return AWS;
+}
 

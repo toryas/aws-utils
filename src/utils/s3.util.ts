@@ -25,14 +25,21 @@ export class S3Utils {
   /**
    * Get S3 Object as steream
    *
-   * @param fileURL S3 Object's URL  example: s3://myBucket/folder/file.txt
+   * @param {string} fileURL S3 Object's URL  example: s3://myBucket/folder/file.txt
+   * @param {string} range specific range to get from s3 like `bytes=0-100`
    */
-  public getStream(fileURL: string): any {
+  public getStream(fileURL: string, range = ""): any {
+    let params: any;
     let s3File = S3Utils.urlDeconstruct(fileURL);
-    let s3Object = this.s3Api.getObject({
+    params = {
       Bucket: s3File.bucket,
       Key: s3File.key,
-    });
+    };
+    if (range != "") {
+      params = { ...params, Range: range };
+    }
+    let s3Object = this.s3Api.getObject(params);
+
     return s3Object.createReadStream();
   }
 
@@ -148,7 +155,26 @@ export class S3Utils {
   }
 
   /**
-   * Return 
+   * Upload content to S3
+   *
+   * @param content string content
+   * @param bucket bucket name
+   * @param key s3 key for file - example : path/path/file.txt
+   */
+  public async uploadContent(content: string, bucket: string, key: string) {
+    let fileContent = Buffer.from(content, 'utf8');
+    let options = {partSize: 10 * 1024 * 1024, queueSize: 1};
+        let params = {
+            Body: fileContent,
+            Bucket: bucket,
+            Key: key
+        }
+
+    return await this.s3Api.upload(params, options).promise();
+  }
+
+  /**
+   * Return
    * @param bucket S3 bucket
    * @param key S3 key
    */
@@ -157,12 +183,12 @@ export class S3Utils {
       Bucket: bucket,
       Key: key,
     };
-    let resp =  await this.s3Api.headObject(params).promise();
+    let resp = await this.s3Api.headObject(params).promise();
     return {
-        fileSize:resp.ContentLength,
-        fileSizeUnit: resp.AcceptRanges,
-        ETag:resp.ETag,
-        contentType:resp.ContentType
-    }
+      fileSize: resp.ContentLength,
+      fileSizeUnit: resp.AcceptRanges,
+      ETag: resp.ETag,
+      contentType: resp.ContentType,
+    };
   }
 }
