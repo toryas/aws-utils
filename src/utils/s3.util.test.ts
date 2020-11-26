@@ -2,7 +2,7 @@ import { S3Utils } from "./s3.util";
 import * as fs from "fs";
 
 jest.setTimeout(100000);
-describe("S3 Util Test", () => {
+describe.skip("S3 Util Test", () => {
   let s3Util: S3Utils;
   beforeAll(() => {
     let config = { region: "us-east-1" };
@@ -38,7 +38,7 @@ describe("S3 Util Test", () => {
     fs.rmdirSync(`./tmp`, { recursive: true });
   });
 
-  test.only("test file Detail", async ()=>{
+  test("test file Detail", async ()=>{
       const {bucket,key} = {bucket:"test-app-rules", key:"afp.py"}
       let result = await s3Util.getFileDetail(bucket,key)
   });

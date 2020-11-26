@@ -10,7 +10,7 @@ export class S3Utils {
     let aws = getAWSSdk();
     if (!config) {
       if (aws.configured) {
-        this.s3Api = new aws.sdk.S3({ apiVersion: API_VERSION.athena });
+        this.s3Api = new aws.sdk.S3({ apiVersion: API_VERSION.s3 });
       } else {
         throw new Error(
           "No config params, create a toryas.config.js file in the root or send a config object in constructor"
@@ -18,7 +18,7 @@ export class S3Utils {
       }
     } else {
       AWS.config.update(config);
-      this.s3Api = new AWS.S3({ apiVersion: API_VERSION.athena });
+      this.s3Api = new AWS.S3({ apiVersion: API_VERSION.s3 });
     }
   }
 
@@ -41,6 +41,19 @@ export class S3Utils {
     let s3Object = this.s3Api.getObject(params);
 
     return s3Object.createReadStream();
+  }
+
+  public async downloadFile(fileURL: string, range = "") {
+    let params: any;
+    let s3File = S3Utils.urlDeconstruct(fileURL);
+    params = {
+      Bucket: s3File.bucket,
+      Key: s3File.key,
+    };
+    if (range != "") {
+      params = { ...params, Range: range };
+    }
+    return await this.s3Api.getObject(params).promise();
   }
 
   /**
@@ -163,12 +176,12 @@ export class S3Utils {
    */
   public async uploadContent(content: string, bucket: string, key: string) {
     let fileContent = Buffer.from(content, 'utf8');
-    let options = {partSize: 10 * 1024 * 1024, queueSize: 1};
-        let params = {
-            Body: fileContent,
-            Bucket: bucket,
-            Key: key
-        }
+    let options = { partSize: 10 * 1024 * 1024, queueSize: 1 };
+    let params = {
+      Body: fileContent,
+      Bucket: bucket,
+      Key: key
+    }
 
     return await this.s3Api.upload(params, options).promise();
   }

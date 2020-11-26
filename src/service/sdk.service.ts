@@ -1,11 +1,13 @@
 import * as AWS from 'aws-sdk';
-import { existsSync } from 'fs';
+import { existsSync, readFileSync } from 'fs';
 
 
 export function getAWSSdk() {
     let existConfigFile = existsSync('./toryas.config.js');
     if (existConfigFile) {
-        let { AWS_CONFIG } = require('../../../toryas.config');
+        let  _AWS_CONFIG  = readFileSync('./toryas.config.js').toString();
+        let Objs = eval(_AWS_CONFIG)
+        let { AWS_CONFIG } =  Objs
         AWS.config.update(AWS_CONFIG);
     }
     return {
